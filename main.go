@@ -45,8 +45,9 @@ func UploadHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Req
 		}
 
 		timestamp := time.Now().Unix()
+		log.Printf("upload %v %v %v %v\n", project, subject, body, mimeType)
 
-		c := session.DB("weblog").C("log")
+		c := session.DB("").C("log")
 		if err := c.Insert(&LogEntry{
 			Project:   project,
 			Subject:   subject,
