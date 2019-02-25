@@ -238,7 +238,7 @@ func LogHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Reques
 		switch logEntry.MimeType {
 		case "application/json":
 			//if err := json.NewEncoder(w).Encode(strconv.Unquote(logEntry.Body)); err != nil {
-			w.Write(logEntry.Body)
+			w.Write([]byte(logEntry.Body))
 		default:
 			w.Write([]byte(logEntry.Body))
 		}
