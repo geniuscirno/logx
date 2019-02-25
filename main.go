@@ -39,7 +39,7 @@ func UploadHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Req
 
 		r.ParseForm()
 		body := r.PostFormValue("body")
-		mimeType := r.PostFormValue("mime-type")
+		mimeType := r.PostFormValue("mimeType")
 		if mimeType == "" {
 			mimeType = "html/text"
 		}
@@ -76,7 +76,7 @@ func IndexHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Requ
 				<table>
 					{{range $i, $v := .Project}}
 						<tr>
-						<td>&nbsp;</td><td><a href="/log/{{$v}}">{{$v}}</a></td>
+						<td>&nbsp;</td><td><a href="/log/{{$v}}/">{{$v}}</a></td>
 						</tr>
 					{{end}}
 				</table>
@@ -123,7 +123,7 @@ func ProjecttHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.R
 				<table>
 					{{range $i, $v := .Subject}}
 						<tr>
-						<td>&nbsp;</td><td><a href="/log/{{$.Project}}/{{$v}}">{{$v}}</a></td>
+						<td>&nbsp;</td><td><a href="/log/{{$.Project}}/{{$v}}/">{{$v}}</a></td>
 						</tr>
 					{{end}}
 				</table>
