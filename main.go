@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"html/template"
 	"log"
@@ -238,10 +237,8 @@ func LogHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Reques
 		w.Header().Set("Content-Type", logEntry.MimeType)
 		switch logEntry.MimeType {
 		case "application/json":
-			if err := json.NewEncoder(w).Encode(logEntry.Body); err != nil {
-				w.Write([]byte(err.Error()))
-				return
-			}
+			//if err := json.NewEncoder(w).Encode(strconv.Unquote(logEntry.Body)); err != nil {
+			w.Write(logEntry.Body)
 		default:
 			w.Write([]byte(logEntry.Body))
 		}
