@@ -9,5 +9,3 @@ FROM alpine:latest
 WORKDIR /logx
 
 COPY --from=builder /logx/bin ./bin
-
-ENTRYPOINT ["./bin/logx"]

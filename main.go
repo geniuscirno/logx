@@ -251,6 +251,9 @@ func main() {
 	flag.StringVar(&mongoUrl, "mongo-url", "mongodb://127.0.0.1:27017/log", "mongodb url")
 	flag.StringVar(&bind, "bind", ":80", "bind addr")
 	flag.Parse()
+	log.Println("start:")
+	log.Println("mongodb:", mongoUrl)
+	log.Println("bind:", bind)
 
 	session, err := mgo.Dial(mongoUrl)
 	if err != nil {
