@@ -46,7 +46,7 @@ func UploadHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Req
 		}
 
 		timestamp := time.Now().Unix()
-		log.Printf("upload %v %v %v %v\n", project, subject, body, mimeType)
+		log.Printf("upload %v %v %v %v %v\n", project, subject, params, body, mimeType)
 
 		c := session.DB("").C("log")
 		if err := c.Insert(&LogEntry{
@@ -209,6 +209,7 @@ func SubjectHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Re
 		var result = []LogHeader{}
 		err := c.Find(bson.M{"project": project, "subject": subject}).Select(bson.M{
 			"_id":       1,
+			"params":    1,
 			"timestamp": 1,
 		}).All(&result)
 		if err != nil {
@@ -239,13 +240,7 @@ func LogHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Reques
 		}
 
 		w.Header().Set("Content-Type", logEntry.MimeType)
-		switch logEntry.MimeType {
-		case "application/json":
-			//if err := json.NewEncoder(w).Encode(strconv.Unquote(logEntry.Body)); err != nil {
-			w.Write([]byte(logEntry.Body))
-		default:
-			w.Write([]byte(logEntry.Body))
-		}
+		w.Write([]byte(logEntry.Body))
 	}
 }
 
