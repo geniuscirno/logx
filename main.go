@@ -120,6 +120,9 @@ func ProjecttHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.R
 			<head>
 			</head>
 			<body>
+				<h3>project: {{.Project}}</h3>
+				<br>
+				<br>
 				<p>log available:</p>
 				<br>
 				<table>
@@ -181,6 +184,7 @@ func SubjectHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Re
 			</head>
 			<body>
 				<h3>project: {{.Project}}</h3>
+				<h4>subject: {{.Subject}}</h4>
 				<br>
 				<br>
 				<p>log available:</p>
