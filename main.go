@@ -160,6 +160,7 @@ func ProjecttHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.R
 
 type LogHeader struct {
 	ID        bson.ObjectId `bson:"_id"`
+	Params    string
 	Timestamp int64
 }
 
