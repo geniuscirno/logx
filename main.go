@@ -15,6 +15,7 @@ import (
 type LogEntry struct {
 	Project   string `json:"project"`
 	Subject   string `json:"subject"`
+	Params    string `json:"params"`
 	Body      string `json:"body"`
 	Timestamp int64  `json:"timestamp"`
 	MimeType  string `json:"mime-type"`
@@ -38,6 +39,7 @@ func UploadHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Req
 
 		r.ParseForm()
 		body := r.PostFormValue("body")
+		params := r.PostFormValue("params")
 		mimeType := r.PostFormValue("mimeType")
 		if mimeType == "" {
 			mimeType = "html/text"
@@ -50,6 +52,7 @@ func UploadHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Req
 		if err := c.Insert(&LogEntry{
 			Project:   project,
 			Subject:   subject,
+			Params:    params,
 			Body:      body,
 			Timestamp: timestamp,
 			MimeType:  mimeType,
@@ -184,7 +187,7 @@ func SubjectHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Re
 				<table>
 					{{range $i, $v := .Header}}
 						<tr>
-						<td>&nbsp;</td><td><a href="/log/{{$.Project}}/{{$.Subject}}/{{$v.ID.Hex}}">{{$v.ID.Hex}}</a></td>
+						<td>&nbsp;</td><td><a href="/log/{{$.Project}}/{{$.Subject}}/{{$v.ID.Hex}}">{{$v.ID.Hex}}</a></td><td>{{$v.Params}}</td>
 						<td>{{$v.Date}}</td>
 						</tr>
 					{{end}}
