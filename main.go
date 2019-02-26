@@ -180,7 +180,7 @@ func SubjectHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Re
 			<head>
 			</head>
 			<body>
-				<h1>project: {{.Project}}</h1>
+				<h3>project: {{.Project}}</h3>
 				<br>
 				<br>
 				<p>log available:</p>
