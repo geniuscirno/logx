@@ -73,7 +73,7 @@ func IndexHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Requ
 			<head>
 			</head>
 			<body>
-				log available:
+				<p>log available:</p>
 				<br>
 				<table>
 					{{range $i, $v := .Project}}
@@ -120,7 +120,7 @@ func ProjecttHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.R
 			<head>
 			</head>
 			<body>
-				log available:
+				<p>log available:</p>
 				<br>
 				<table>
 					{{range $i, $v := .Subject}}
@@ -180,10 +180,10 @@ func SubjectHandler(session *mgo.Session) func(w http.ResponseWriter, r *http.Re
 			<head>
 			</head>
 			<body>
-				project: {{.Project}}
+				<h1>project: {{.Project}}</h1>
 				<br>
 				<br>
-				log available:
+				<p>log available:</p>
 				<br>
 				<table>
 					{{range $i, $v := .Header}}
